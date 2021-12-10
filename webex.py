@@ -2,7 +2,7 @@ import urllib3
 import json
 import requests
 
-def webexSend():
+def webexSend(text):
     urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
     host = 'https://api.ciscospark.com'
@@ -40,8 +40,8 @@ def webexSend():
 
     msg_body = {
         "roomId": roomId,
-        "text": "ROUTER 1 UPDATED"
+        "text": text
     }
     requests.post(msg_url, headers=headers, data=json.dumps(msg_body), verify=False).json()
 
-webexSend()
+webexSend("Network Configuration has been updated")
