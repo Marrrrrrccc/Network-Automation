@@ -43,5 +43,3 @@ def webexSend(text):
         "text": text
     }
     requests.post(msg_url, headers=headers, data=json.dumps(msg_body), verify=False).json()
-
-webexSend("Network Configuration has been updated")
