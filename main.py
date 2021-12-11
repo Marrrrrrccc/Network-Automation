@@ -133,7 +133,7 @@ def delete_user(u, p, pl):
         print(e)
 
 
-def edit_hostname():
+def edit_hostname(hostname):
     try:
         with manager.connect(
                 host=host,
@@ -142,56 +142,22 @@ def edit_hostname():
                 password=password,
                 hostkey_verify=False
         ) as connection:
-            CONFIGURATION = '''
+            CONFIGURATION = f'''
             <config>
                 <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
-                    <hostname>router1</hostname>
+                    <hostname>{hostname}</hostname>
                 </native>
             </config>
             '''
-
-            response = connection.edit_config(CONFIGURATION, target="running")
+            netconf_config = CONFIGURATION.format(
+                hostname=hostname
+            )
+            response = connection.edit_config(netconf_config, target="running")
     except Exception as e:
         print(e)
 
 
 # function to edit given interface
-def edit_loopback(int_name, int_desc, ip_addr, ip_mask):
-    try:
-        with manager.connect(
-                host=host,
-                port=port,
-                username=user,
-                password=password,
-                hostkey_verify=False
-        ) as connection:
-            config_template = '''
-            <config>
-                <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
-                    <interface>
-                        <Loopback>
-                            <name>{int_name}</name>
-                            <description>{int_desc}</description>
-                            <ip>
-                                <address>
-                                    <primary>
-                                        <address>{ip_addr}</address>
-                                        <mask>{ip_mask}</mask>
-                                    </primary>
-                                </address>
-                            </ip>
-                        </Loopback>
-                    </interface>
-                </native>
-            </config>
-                '''
-
-            netconf_config = config_template.format(
-                int_name=int_name, int_desc=int_desc, ip_addr=ip_addr, ip_mask=ip_mask
-            )
-            response = connection.edit_config(netconf_config, target="running")
-    except Exception as e:
-        print(e)
 
 
 def add_loopback():
@@ -267,34 +233,8 @@ def edit_gigabitethernet(int_name, int_desc, ip_addr, ip_mask):
             response = connection.edit_config(netconf_config, target="running")
     except Exception as e:
         print(e)
-webex.webexSend("Network Configuration has been updated")
-
-    # edit_int()
 
 
-# get_interface_stats("GigabitEthernet3")
-
-# get_running_config(	<data>
-
-# add_loopback()
-edit_gigabitethernet("GigabitEthernet3", "My first GigabitEthernet", "192.168.1.1", "255.255.255.0")
-# get_startup_config()
-# get_routing_info()
-# edit_ospf("23", "11.11.11.11", "0.0.0.0", "32", "32.32.32.32")
-# delete_ospf("23", "11.11.11.11", "0.0.0.0", "32", "32.32.32.32")
-# get_ospf_info()
-# edit_hostname()
-# get_hostname()
-# get_bgp_info()
-# get_capablities()
-# edit_user("aaaaa", "bbbbb", "12")
-# delete_user("aaaaa", "bbbbb", "12")
-# get_users()
-# get_crypto()
-# edit_ip_route("100.100.100.100", "255.255.255.255", "10.1.1.1", "GigabitEthernet2")
-# delete_ip_route("100.100.100.100", "255.255.255.255", "10.1.1.1", "GigabitEthernet2")
-# get_ip_route()
-# get_ip_ssh()
-# edit_ip_access_list_standard("myacl", 'deny', '5', '56.45.56.45', '0.0.0.0')
-# delete_ip_access_list_standard("myacl", 'deny', '5', '56.45.56.45', '0.0.0.0')
-# get_ip_access_list_standard()
+get_running_config()
+#edit_hostname("Switch1")
+#webex.webexSend("Network Configuration has been updated")
