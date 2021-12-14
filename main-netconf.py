@@ -1,6 +1,7 @@
 from ncclient import manager #Provides connection to NETCONF
 import xml.dom.minidom #Prettifies XML using python
 import webex as webex #For sending messages to Webex Teams
+
 def getCurrentConfig(str_divider):
     #GETTING THE CURRENT RUNNING CONFIG OF CSR1kv
     current_config = m.get_config(source="running", filter=netconf_filter)
@@ -15,7 +16,7 @@ def modifyCurrentConfig():
 
 #MAIN METHOD
 m = manager.connect(
-    host = "192.168.56.101",
+    host = "192.168.56.104",
     port="830",
     username="cisco",
     password="cisco123!",
@@ -24,7 +25,7 @@ m = manager.connect(
 
 #DATAFIELDS that will be changed
 newConfig = {
-    "hostname": "NEWHOSTNAME",
+    "hostname": "NewHostname",
     "motd": "#Welcome_to_the_CLI_interface_of_CSR1000v",
     "GigDescription" : "Description for GigEthernet01",
     "ip": "10.1.1.1",

@@ -9,7 +9,7 @@ def webexSend(text):
     teams_path = "/v1/teams"
     rooms_path = "/v1/rooms"
     msg_path = "/v1/messages"
-    token = "Bearer ODhjODlkNTctZGRkNy00OWYzLTgwYjItZDA0MGQ1ZWVhMWIyNTU2ZTVmYzktMGE4_P0A1_cb5a5b29-3fc8-41df-9e13-7f1e41bb9760"
+    token = "Bearer OTBlNjc1MWYtN2IyZi00NmE5LThjNTEtMzRkZDU3MzE1M2NhNDMyZmEwMTctZDZm_P0A1_cb5a5b29-3fc8-41df-9e13-7f1e41bb9760"
 
     teams_url = f"{host}{teams_path}"
     rooms_url = f"{host}{rooms_path}"
